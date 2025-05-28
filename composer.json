@@ -7,7 +7,7 @@
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.2",
         "inovector/mixpost": "^2.1",
-        "inovector/mixpost-auth": "^2.1",
+        "inovector/mixpost-auth": "^2.2",
         "laravel/framework": "^12.0",
         "laravel/horizon": "^5.15",
         "laravel/tinker": "^2.8",

@@ -1,0 +1,111 @@
+services:
+  - type: web
+    name: mixpost-app
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        value: # <-- Paste your generated app key here
+      - key: APP_URL
+        value: https://your-app.onrender.com
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromService:
+          type: mysql
+          name: mixpost-mysql
+          property: host
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_DATABASE
+        fromService:
+          type: mysql
+          name: mixpost-mysql
+          property: database
+      - key: DB_USERNAME
+        fromService:
+          type: mysql
+          name: mixpost-mysql
+          property: user
+      - key: DB_PASSWORD
+        fromService:
+          type: mysql
+          name: mixpost-mysql
+          property: password
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: mixpost-redis
+          property: host
+      - key: REDIS_PORT
+        value: "6379"
+      - key: REDIS_PASSWORD
+        fromService:
+          type: redis
+          name: mixpost-redis
+          property: password
+      - key: QUEUE_CONNECTION
+        value: redis
+
+  - type: worker
+    name: mixpost-worker
+    env: docker
+    dockerfilePath: ./Dockerfile
+    startCommand: "php artisan queue:work"
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        value: base64:H7SxSQ+ttKCTNMIMR7zOCfR+s3+BQNZWwRCSP8Kywlc=
+
+      - key: APP_URL
+        value: https://mixpostos.onrender.com
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromService:
+          type: mysql
+          name: mixpost-mysql
+          property: host
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_DATABASE
+        fromService:
+          type: mysql
+          name: mixpost-mysql
+          property: database
+      - key: DB_USERNAME
+        fromService:
+          type: mysql
+          name: mixpost-mysql
+          property: user
+      - key: DB_PASSWORD
+        fromService:
+          type: mysql
+          name: mixpost-mysql
+          property: password
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: mixpost-redis
+          property: host
+      - key: REDIS_PORT
+        value: "6379"
+      - key: REDIS_PASSWORD
+        fromService:
+          type: redis
+          name: mixpost-redis
+          property: password
+      - key: QUEUE_CONNECTION
+        value: redis
+
+  - type: mysql
+    name: mixpost-mysql
+    plan: free
+
+  - type: redis
+    name: mixpost-redis
+    plan: free
+    

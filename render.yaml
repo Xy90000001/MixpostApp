@@ -61,7 +61,7 @@ services:
         value: base64:H7SxSQ+ttKCTNMIMR7zOCfR+s3+BQNZWwRCSP8Kywlc=
 
       - key: APP_URL
-        value: https://mixpostos.onrender.com
+        value: https://mixpostapp.onrender.com
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST

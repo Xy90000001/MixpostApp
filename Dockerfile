@@ -32,6 +32,6 @@ RUN if [ -f package.json ]; then npm install && npm run build; fi
 # Set permissions for storage and cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-EXPOSE 80
+#EXPOSE 80
 
 CMD ["apache2-foreground"]

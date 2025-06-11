@@ -1,38 +1,39 @@
 services:
   - type: web
-    name: mixpost-app
+    name: mixpostapp
     env: docker
     dockerfilePath: ./Dockerfile
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        value: # <-- Paste your generated app key here
+        value: base64:zB/s3NLJYZTLd3Mep4ARe80iVm85aLTOiwSBoYYeYFQ=
+
       - key: APP_URL
-        value: https://your-app.onrender.com
+        value: https://mixpostapp.onrender.com
       - key: DB_CONNECTION
-        value: mysql
+        value: pgsql
       - key: DB_HOST
         fromService:
-          type: mysql
-          name: mixpost-mysql
+          type: postgres
+          name: mixpost-db
           property: host
       - key: DB_PORT
-        value: "3306"
+        value: "5432"
       - key: DB_DATABASE
         fromService:
-          type: mysql
-          name: mixpost-mysql
+          type: postgres
+          name: mixpost-db
           property: database
       - key: DB_USERNAME
         fromService:
-          type: mysql
-          name: mixpost-mysql
+          type: postgres
+          name: mixpost-db
           property: user
       - key: DB_PASSWORD
         fromService:
-          type: mysql
-          name: mixpost-mysql
+          type: postgres
+          name: mixpost-db
           property: password
       - key: REDIS_HOST
         fromService:
@@ -58,33 +59,33 @@ services:
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        value: base64:H7SxSQ+ttKCTNMIMR7zOCfR+s3+BQNZWwRCSP8Kywlc=
-
+        value: base64:zB/s3NLJYZTLd3Mep4ARe80iVm85aLTOiwSBoYYeYFQ=
+        
       - key: APP_URL
         value: https://mixpostapp.onrender.com
       - key: DB_CONNECTION
-        value: mysql
+        value: pgsql
       - key: DB_HOST
         fromService:
-          type: mysql
-          name: mixpost-mysql
+          type: postgres
+          name: mixpost-db
           property: host
       - key: DB_PORT
-        value: "3306"
+        value: "5432"
       - key: DB_DATABASE
         fromService:
-          type: mysql
-          name: mixpost-mysql
+          type: postgres
+          name: mixpost-db
           property: database
       - key: DB_USERNAME
         fromService:
-          type: mysql
-          name: mixpost-mysql
+          type: postgres
+          name: mixpost-db
           property: user
       - key: DB_PASSWORD
         fromService:
-          type: mysql
-          name: mixpost-mysql
+          type: postgres
+          name: mixpost-db
           property: password
       - key: REDIS_HOST
         fromService:
@@ -101,8 +102,8 @@ services:
       - key: QUEUE_CONNECTION
         value: redis
 
-  - type: mysql
-    name: mixpost-mysql
+  - type: postgres
+    name: mixpost-db
     plan: free
 
   - type: redis
